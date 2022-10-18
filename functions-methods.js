@@ -9,8 +9,11 @@
 // getEmailDomain("t.mellink@novi.nl") geeft novi.nl
 // getEmailDomain("a.wiersma@outlook.com") geeft outlook.com
 
-
-
+function getEmailDomain(emailAddress) {
+    const myArray = emailAddress.split("@");
+    return myArray[1];
+}
+console.log(getEmailDomain('gerardheuvelman@gmail.com'));
 
 /* Opdracht  2 */
 // Schrijf een functie genaamd typeOfEmail, die een emailadres verwacht. De functie checkt of het emailadres een novi domein heeft (medewerker), een novi-education domein (student), of extern domein (zoals gmail of outlook)
@@ -20,7 +23,21 @@
 // typeOfEmail("novi.nlaapjesk@outlook.com") geeft geeft "Extern" <-- deze moet het ook doen!
 // typeOfEmail("a.wiersma@outlook.com") geeft "Extern"
 
+function typeOfEmail(emailAddress) {
+    myArray = emailAddress.split('@');
+    switch (myArray[1]) {
+        case 'novi.nl':
+            return 'Medewerker';
+        case 'novi-education.nl':
+            return 'Student';
+        case 'outlook.com':
+            return 'Extern';
+        default:
+            return 'Er ging iets mis...'
+    }
+}
 
+console.log(typeOfEmail('gerardheuvelman@novi-education.nl'));
 
 /* Opdracht  3 */
 // Schrijf een functie genaamd checkEmailValidity, die een emailadres verwacht en checkt of het emailadres valide is. De functie returned true of false, afhankelijk van de uitkomst.
@@ -34,3 +51,19 @@
 // checkEmailValidity("n.eekenanovi.nl") geeft false - want geen @
 // checkEmailValidity("n.eeken@novinl.") geeft false - want de punt mag niet als laatst
 // checkEmailValidity("tessmellink@novi,nl") geeft false - want er staat een komma in
+
+function emailValidity(emailAddress) {
+    if (emailAddress.includes('@')) {
+        if (!emailAddress.includes(',')) {
+            if (emailAddress[emailAddress.length-1] != '.') {
+                return true;
+            }
+        }
+        return false;
+    }
+    return  false;
+}
+
+console.log(emailValidity('gerardheuvelman@gmail.com'));
+console.log(emailValidity('gerard,heuvelman@gmail.com'));
+console.log(emailValidity('gerardheuvelman@gmail.com.'));
